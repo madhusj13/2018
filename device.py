@@ -31,7 +31,6 @@ class Device:
         connect_dict['port'] = self.port
         connect_dict['device_type'] = self.device_type
         try_counter = 1
-        import pdb ; pdb.set_trace()
         while try_counter <= num_retries:
             try:
                 client = ConnectHandler(**connect_dict)

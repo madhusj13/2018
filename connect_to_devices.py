@@ -31,7 +31,6 @@ def connect_using_async():
         print('{0} Connecting ...'.format(server.host))
             #print('{0} sleeping for: {1} seconds'.format(task_name, seconds_to_sleep))
         server.execute()
-        yield from asyncio.sleep(5)
     
     loop = asyncio.get_event_loop()
     tasks = [my_coroutine(v) for k,v in device_dict.items()]
