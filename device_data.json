@@ -1,0 +1,23 @@
+{
+    "commands": [
+        "uname -a",
+        "uptime",
+        "ifconfig"
+    ],
+    "device_list":[
+        {
+            "hostname": "server1",
+            "username": "root",
+            "password": "password",
+            "port": "22",
+            "address": "server1"
+        },
+        {
+            "hostname": "server2",
+            "username": "root",
+            "password": "password",
+            "port": "22",
+            "address": "server2"
+        }
+    ]
+}

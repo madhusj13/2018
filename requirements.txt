@@ -1,0 +1,4 @@
+Flask==0.10.1
+parallel-ssh==1.5.2
+netmiko==2.1.0
+pytz==2018.3
