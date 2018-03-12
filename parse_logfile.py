@@ -3,6 +3,17 @@ from time import strptime
 import pytz
 strptime('Feb','%b').tm_mon
 
+def convert_timezone(line):
+        regex = re.compile('(\d+:\d+:\d+)\s+')
+        datetimeFormat = '%H:%M:%S'
+        old_timezone = pytz.timezone("GMT")
+        new_timezone = pytz.timezone("US/Pacific")
+        new_line = regex.sub(\
+                        lambda m: m.group().replace(m.group(0), '%s ' %(old_timezone.localize(datetime.datetime.strptime(\
+                        m.group(1), datetimeFormat)).astimezone(new_timezone).strftime('%H:%M:%S'))), line)  
+        new_line = re.sub('\+[0-9]{1,5}', '-8000', new_line)     
+        return new_line
+        
 def parse_logfile(file,key):
     """
     Reads the log file
@@ -14,12 +25,9 @@ def parse_logfile(file,key):
 
     count = 0
     datetimeFormat = '%m %d %H:%M:%S'
-    datetimeFormat1 = '%H:%M:%S'
     diff = 0 
     temp = None
-    regex = re.compile('(\d+:\d+:\d+)\s+')
-    old_timezone = pytz.timezone("GMT")
-    new_timezone = pytz.timezone("US/Pacific")
+
 
     with open(file,'r') as f:
         for line in f:
@@ -37,11 +45,7 @@ def parse_logfile(file,key):
                         datetime.datetime.strptime(temp, datetimeFormat)).total_seconds()
                         print (diff)
                     temp = time_stamp             
-                    new_line = regex.sub(\
-                        lambda m: m.group().replace(m.group(0), '%s ' %(old_timezone.localize(datetime.datetime.strptime(\
-                        m.group(1), datetimeFormat1)).astimezone(new_timezone).strftime('%H:%M:%S'))), line)  
-                    new_line = re.sub('\+[0-9]{1,5}', '-8000', new_line)     
-                    print (new_line)
+                    print (convert_timezone(line))
 
     print ('count is %s' %count)
     print ('The average delay between each log occurence is %s' %float(diff/(count-1)))

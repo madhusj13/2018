@@ -7,3 +7,6 @@
 
 <br>Once you are in, goto /usr/src/app. You will find all the code in that location.
 <br>Please run with python3.6 instead of python
+<br>
+<br>python3.6 connect_to_devices.py
+<br>python3.6 parse_logfile.py uptime frontend-service.log
